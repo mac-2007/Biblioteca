@@ -1,18 +1,15 @@
 package com.example;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class LibroTest {
     @Test
     @DisplayName("Libro creado tiene titulo correcto")
-    public void libroCreado()
+    public void libroCreadoTitulo()
     {
         Libro libro1 = new Libro("El Quijote");
         assertEquals("El Quijote", libro1.getTitulo());
@@ -20,7 +17,7 @@ public class LibroTest {
 
     @Test
     @DisplayName("Libro creado no esta prestado")
-    public void libroCreado()
+    public void libroCreadoPrestado()
     {
         Libro libro1 = new Libro("El Quijote");
         assertFalse(libro1.getPrestado());
@@ -32,7 +29,8 @@ public class LibroTest {
     {
         Libro libro1 = new Libro("El Quijote");
         libro1.prestar();
-        assertTrue(libro1.getPrestado());
+        boolean prueba = libro1.getPrestado();
+        assertTrue(prueba);
     }
     @Test
     @DisplayName("No se puede prestar un libro que ya está prestado")
@@ -41,11 +39,12 @@ public class LibroTest {
         Libro libro1 = new Libro("El Quijote");
         libro1.prestar();
         libro1.prestar();
-        assertTrue("El libro ya está prestado", libro1.prestar());
+        boolean resultado = libro1.prestar();
+        assertFalse(resultado);
     }
     @Test
     @DisplayName("Devolver correctamente")
-    public void libroDevuelto()
+    public void devolverCorrectamente()
     {
         Libro libro1 = new Libro("El Quijote");
         libro1.prestar();
@@ -54,16 +53,17 @@ public class LibroTest {
     }
     @Test
     @DisplayName("No se puede devolver un libro que no está prestado")
-    public void libroDevuelto()
+    public void devolverNoPrestado()
     {
         Libro libro1 = new Libro("El Quijote");
-        assertTrue("El libro no está prestado", libro1.devolver());
+        boolean resultado = libro1.devolver();
+        assertFalse(resultado);
     }
     @Test
     @DisplayName("Anadir libro correctamente")
     public void anadirLibro()
     {
-        Biblioteca biblioteca1 = new Biblioteca(0, new String[100]);
+        Biblioteca biblioteca1 = new Biblioteca(new String[100]);
         Libro libro1 = new Libro("El Quijote");
         biblioteca1.anadirLibro(libro1);
         assertEquals(1, biblioteca1.getNumeroLibros());
@@ -72,7 +72,7 @@ public class LibroTest {
     @DisplayName("Numero total es correcto")
     public void anadirLibros()
     {   
-        Biblioteca biblioteca1 = new Biblioteca(0, new String[100]);
+        Biblioteca biblioteca1 = new Biblioteca(new String[100]);
         Libro libro1 = new Libro("El Quijote");
         biblioteca1.anadirLibro(libro1);
         assertEquals(1, biblioteca1.getNumeroLibros());
