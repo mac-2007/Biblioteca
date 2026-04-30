@@ -8,8 +8,8 @@ public class Libro {
         this.titulo = titulo;
     }
     // Métodos
-    public void getTítulo (){    
-        System.out.println ("El título del libro es: " + titulo);
+    public String getTitulo (){    
+        return titulo;
     }
     public void getPrestado (){    
         if (prestado == true){
